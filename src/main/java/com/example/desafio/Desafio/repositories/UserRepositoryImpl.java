@@ -1,5 +1,6 @@
 package com.example.desafio.Desafio.repositories;
 
+import com.example.desafio.Desafio.DTOs.FollowersCountDTO;
 import com.example.desafio.Desafio.DTOs.SellerDTO;
 import com.example.desafio.Desafio.models.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -51,7 +52,7 @@ public class UserRepositoryImpl implements UserRepository {
         ObjectMapper objectMapper = new ObjectMapper();
         TypeReference<List<User>> typeRef = new TypeReference<List<User>>() {};
 
-        users = objectMapper.readValue(this.sellersFile, typeRef);
+        users = objectMapper.readValue(this.userFile, typeRef);
 
         return users;
     }
@@ -61,18 +62,39 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public SellerDTO followSeller (Integer userId, Integer userIdToFollow) throws Exception {
+    public SellerDTO followSeller (Integer userId, Integer userIdToFollow) throws Exception { //US 0001
+        SellerDTO sellerDTO = null;
+        try{
 
-        User userBuyer = findById(userId);
-        SellerDTO sellerDTO = sellerRepositoryImpl.findById(userIdToFollow);
+            User userBuyer = findById(userId);
+            sellerDTO = sellerRepositoryImpl.findById(userIdToFollow);
 
-        sellerDTO.getIdsFollowers().add(userId);
-        userBuyer.getIdsFolllowed().add(userIdToFollow);
-        sellerRepositoryImpl.updateSeller(userIdToFollow, sellerDTO);
-        this.updateUser(userId,userBuyer);
+            idIsEqual(userId, userIdToFollow);
+            userIsFollowing(userBuyer, sellerDTO);
+
+            sellerDTO.getIdsFollowers().add(userId);
+            userBuyer.getIdsFolllowed().add(userIdToFollow);
+            sellerRepositoryImpl.updateSeller(userIdToFollow, sellerDTO);
+            this.updateUser(userId,userBuyer);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
         return sellerDTO;
 
+    }
+
+    private void idIsEqual (Integer userId, Integer userIdToFollow) throws Exception {
+        if(userId.equals(userIdToFollow)){
+            throw new Exception("User is following");
+        }
+    }
+
+    private void userIsFollowing (User userBuyer, SellerDTO seller) throws Exception{
+        if(userBuyer.getIdsFolllowed().contains(seller.getId())){
+            throw new Exception("User is following");
+        }
     }
 
 
@@ -86,6 +108,18 @@ public class UserRepositoryImpl implements UserRepository {
         mapper.writeValue(this.userFile,listUsers);
 
         return user;
+    }
+
+    @Override
+    public FollowersCountDTO getTotalFollowers(Integer userId) throws Exception {
+        SellerDTO sellerDTO = sellerRepositoryImpl.findById(userId);
+        FollowersCountDTO result = new FollowersCountDTO();
+
+        result.setUserId(userId);
+        result.setUserName(sellerDTO.getName());
+        result.setFollowers_count(sellerDTO.getIdsFollowers().size());
+
+        return result;
     }
 
 

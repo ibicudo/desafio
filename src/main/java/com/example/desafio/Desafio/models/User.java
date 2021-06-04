@@ -1,5 +1,7 @@
 package com.example.desafio.Desafio.models;
 
+import com.example.desafio.Desafio.DTOs.SellerDTO;
+
 import java.util.List;
 
 public class User {
@@ -16,6 +18,14 @@ public class User {
         this.name = name;
         this.seller = seller;
         this.idsFolllowed = idsFolllowed;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User that = (User) o;
+        return id == that.id;
     }
 
     public Integer getId() {

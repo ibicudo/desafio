@@ -9,13 +9,17 @@
     "id": 2,
     "name": "Maria",
     "seller": false,
-    "idsFolllowed": []
+    "idsFolllowed": [
+      11
+    ]
   },
   {
     "id": 3,
     "name": "Joaquim",
     "seller": false,
-    "idsFolllowed": []
+    "idsFolllowed": [
+      11
+    ]
   },
   {
     "id": 4,
