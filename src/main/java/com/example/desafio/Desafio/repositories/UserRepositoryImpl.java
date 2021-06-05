@@ -1,6 +1,8 @@
 package com.example.desafio.Desafio.repositories;
 
 import com.example.desafio.Desafio.DTOs.FollowersCountDTO;
+import com.example.desafio.Desafio.DTOs.FollowDTO;
+import com.example.desafio.Desafio.DTOs.FollowersListDTO;
 import com.example.desafio.Desafio.DTOs.SellerDTO;
 import com.example.desafio.Desafio.models.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -62,7 +64,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public SellerDTO followSeller (Integer userId, Integer userIdToFollow) throws Exception { //US 0001
+    public SellerDTO followSeller (Integer userId, Integer userIdToFollow) throws Exception {
         SellerDTO sellerDTO = null;
         try{
 
@@ -121,6 +123,52 @@ public class UserRepositoryImpl implements UserRepository {
 
         return result;
     }
+
+    @Override
+    public FollowersListDTO getFollowersList(Integer userId) throws Exception {
+        SellerDTO sellerDTO = sellerRepositoryImpl.findById(userId);
+        List<Integer> users = sellerDTO.getIdsFollowers();
+        FollowersListDTO resultFollowers = new FollowersListDTO();
+
+        resultFollowers = setListFollow(users, resultFollowers);
+
+        resultFollowers.setUserId(userId);
+        resultFollowers.setUserName(sellerDTO.getName());
+
+        return resultFollowers;
+    }
+
+    @Override
+    public FollowersListDTO getUserFollowingList(Integer userId) throws Exception {
+        User user = findById(userId);
+        List <Integer> users = user.getIdsFolllowed();
+        FollowersListDTO resultFollowed = new FollowersListDTO();
+
+        resultFollowed = setListFollow(users, resultFollowed);
+
+        resultFollowed.setUserId(userId);
+        resultFollowed.setUserName(user.getName());
+
+        return resultFollowed;
+    }
+
+    private FollowersListDTO setListFollow (List<Integer> users, FollowersListDTO resultFollow) throws Exception {
+        int id ;
+        User user = new User();
+        FollowDTO followDTO = new FollowDTO();
+
+        for(int i=0; i< users.size(); i++){
+            id = users.get(i);
+            user = findById(id);
+            followDTO = new FollowDTO();
+            followDTO.setUserId(id);
+            followDTO.setUserName(user.getName());
+            resultFollow.getFollow().add(i, followDTO);
+        }
+        return  resultFollow;
+    }
+
+
 
 
 }

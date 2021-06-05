@@ -1,6 +1,7 @@
 package com.example.desafio.Desafio.services;
 
 import com.example.desafio.Desafio.DTOs.FollowersCountDTO;
+import com.example.desafio.Desafio.DTOs.FollowersListDTO;
 import com.example.desafio.Desafio.DTOs.SellerDTO;
 import com.example.desafio.Desafio.models.User;
 import com.example.desafio.Desafio.repositories.UserRepository;
@@ -26,5 +27,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public FollowersCountDTO getTotalFollowers(Integer userId) throws Exception {
         return userRepository.getTotalFollowers(userId);
+    }
+
+    @Override
+    public FollowersListDTO getFollowersList(Integer userId) throws Exception {
+
+        return userRepository.getFollowersList(userId);
+    }
+
+    @Override
+    public FollowersListDTO getUserFollowingList(Integer userId) throws Exception {
+        return userRepository.getUserFollowingList(userId);
     }
 }

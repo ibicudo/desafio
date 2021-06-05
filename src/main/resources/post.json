@@ -1,0 +1,17 @@
+[
+  {
+    "userId": 11,
+    "id_post": 18,
+    "date": "29-04-2021",
+    "detail": {
+      "product_id": 1,
+      "productName": "Cadeira Gamer",
+      "type": "Gamer",
+      "brand": "Racer",
+      "color": "Red & Black",
+      "notes": "Special Edition"
+    },
+    "category": 100,
+    "price": 1500.5
+  }
+]
