@@ -40,5 +40,10 @@ public class UserController {
         return  userService.getUserFollowingList(userId);
     }
 
+    @PostMapping("/{userId}/unfollow/{userIdToFollow}")
+    public SellerDTO unfollowSeller(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) throws Exception { //US 0007
+        return userService.unfollowSeller(userId, userIdToFollow);
+    }
+
 
 }

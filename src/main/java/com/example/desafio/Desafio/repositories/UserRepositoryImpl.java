@@ -82,14 +82,37 @@ public class UserRepositoryImpl implements UserRepository {
             e.printStackTrace();
         }
 
-
         return sellerDTO;
 
     }
 
+    @Override
+    public SellerDTO unfollowSeller(Integer userId, Integer userIdToFollow) throws Exception {
+        SellerDTO sellerDTO = null;
+        try{
+
+            User userBuyer = findById(userId);
+            sellerDTO = sellerRepositoryImpl.findById(userIdToFollow);
+
+            idIsEqual(userId, userIdToFollow);
+            if(!userBuyer.getIdsFolllowed().contains(sellerDTO.getId())){
+                throw new Exception("User is not following seller");
+            }
+
+            sellerDTO.getIdsFollowers().remove(userId);
+            userBuyer.getIdsFolllowed().remove(userIdToFollow);
+            sellerRepositoryImpl.updateSeller(userIdToFollow, sellerDTO);
+            this.updateUser(userId,userBuyer);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return sellerDTO;
+    }
+
     private void idIsEqual (Integer userId, Integer userIdToFollow) throws Exception {
         if(userId.equals(userIdToFollow)){
-            throw new Exception("User is following");
+            throw new Exception("Users are equal");
         }
     }
 
