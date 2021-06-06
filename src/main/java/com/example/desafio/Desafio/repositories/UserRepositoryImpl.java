@@ -2,8 +2,9 @@ package com.example.desafio.Desafio.repositories;
 
 import com.example.desafio.Desafio.DTOs.FollowersCountDTO;
 import com.example.desafio.Desafio.DTOs.FollowDTO;
-import com.example.desafio.Desafio.DTOs.FollowersListDTO;
+import com.example.desafio.Desafio.DTOs.FollowListDTO;
 import com.example.desafio.Desafio.DTOs.SellerDTO;
+import com.example.desafio.Desafio.models.Post;
 import com.example.desafio.Desafio.models.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,8 +16,7 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Repository
@@ -148,10 +148,10 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public FollowersListDTO getFollowersList(Integer userId) throws Exception {
+    public FollowListDTO getFollowersList(Integer userId) throws Exception {
         SellerDTO sellerDTO = sellerRepositoryImpl.findById(userId);
         List<Integer> users = sellerDTO.getIdsFollowers();
-        FollowersListDTO resultFollowers = new FollowersListDTO();
+        FollowListDTO resultFollowers = new FollowListDTO();
 
         resultFollowers = setListFollow(users, resultFollowers);
 
@@ -162,10 +162,10 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public FollowersListDTO getUserFollowingList(Integer userId) throws Exception {
+    public FollowListDTO getUserFollowingList(Integer userId) throws Exception {
         User user = findById(userId);
         List <Integer> users = user.getIdsFolllowed();
-        FollowersListDTO resultFollowed = new FollowersListDTO();
+        FollowListDTO resultFollowed = new FollowListDTO();
 
         resultFollowed = setListFollow(users, resultFollowed);
 
@@ -175,7 +175,55 @@ public class UserRepositoryImpl implements UserRepository {
         return resultFollowed;
     }
 
-    private FollowersListDTO setListFollow (List<Integer> users, FollowersListDTO resultFollow) throws Exception {
+    @Override
+    public List<FollowDTO> getFollowersOrder(Integer userId, String typeOrder) throws Exception {
+        List<FollowDTO> followersOrder = new ArrayList<>();
+
+        if(typeOrder != null){
+            FollowListDTO seller = getFollowersList(userId);
+            followersOrder = orderListFollow(seller, typeOrder);
+
+        }
+        return followersOrder;
+    }
+
+    @Override
+    public List<FollowDTO> getFollowedOrder(Integer userId, String typeOrder) throws Exception {
+        List<FollowDTO> followedOrder = new ArrayList<>();
+
+        if(typeOrder != null){
+            FollowListDTO user = getUserFollowingList(userId);
+            followedOrder = orderListFollow(user, typeOrder);
+        }
+        return followedOrder;
+    }
+
+    private List<FollowDTO> orderListFollow (FollowListDTO user, String typeOrder){
+
+        List<FollowDTO> followersOrder = new ArrayList<>();
+        List<FollowDTO> followers = user.getFollow();
+        Map<String, FollowDTO> map = new HashMap<>();
+
+        for(FollowDTO followDTO: followers){
+            map.put(followDTO.getUserName(), followDTO);
+        }
+
+        List<String> keys = new ArrayList<>(map.keySet());
+
+        if(typeOrder.equals("name_asc")) {
+            Collections.sort(keys);
+        }else if(typeOrder.equals("name_desc")){
+            Collections.sort(keys, Collections.reverseOrder());
+        }
+
+        for(String name : keys){
+            followersOrder.add(map.get(name));
+        }
+
+        return followersOrder;
+    }
+
+    private FollowListDTO setListFollow (List<Integer> users, FollowListDTO resultFollow) throws Exception {
         int id ;
         User user = new User();
         FollowDTO followDTO = new FollowDTO();

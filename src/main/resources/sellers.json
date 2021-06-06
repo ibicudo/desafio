@@ -1,1 +1,58 @@
-[{"id":11,"name":"Ingrid","idsFollowers":[3]},{"id":12,"name":"Ana Maria","idsFollowers":[]},{"id":13,"name":"Lucas","idsFollowers":[]},{"id":14,"name":"Claudia","idsFollowers":[]},{"id":15,"name":"Roberto","idsFollowers":[3]},{"id":16,"name":"Leonardo","idsFollowers":[]},{"id":17,"name":"Leandro","idsFollowers":[]},{"id":18,"name":"Gael","idsFollowers":[]},{"id":19,"name":"Marilia","idsFollowers":[]},{"id":20,"name":"Joao Pedro","idsFollowers":[]}]
+[
+  {
+    "id": 11,
+    "name": "Ingrid",
+    "idsFollowers": [
+      3,
+      2,
+      4
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Ana Maria",
+    "idsFollowers": []
+  },
+  {
+    "id": 13,
+    "name": "Lucas",
+    "idsFollowers": []
+  },
+  {
+    "id": 14,
+    "name": "Claudia",
+    "idsFollowers": []
+  },
+  {
+    "id": 15,
+    "name": "Roberto",
+    "idsFollowers": [
+      3
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Leonardo",
+    "idsFollowers": []
+  },
+  {
+    "id": 17,
+    "name": "Leandro",
+    "idsFollowers": []
+  },
+  {
+    "id": 18,
+    "name": "Gael",
+    "idsFollowers": []
+  },
+  {
+    "id": 19,
+    "name": "Marilia",
+    "idsFollowers": []
+  },
+  {
+    "id": 20,
+    "name": "Joao Pedro",
+    "idsFollowers": []
+  }
+]

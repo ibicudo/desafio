@@ -1,7 +1,8 @@
 package com.example.desafio.Desafio.services;
 
+import com.example.desafio.Desafio.DTOs.FollowDTO;
 import com.example.desafio.Desafio.DTOs.FollowersCountDTO;
-import com.example.desafio.Desafio.DTOs.FollowersListDTO;
+import com.example.desafio.Desafio.DTOs.FollowListDTO;
 import com.example.desafio.Desafio.DTOs.SellerDTO;
 import com.example.desafio.Desafio.models.Post;
 import com.example.desafio.Desafio.models.User;
@@ -43,13 +44,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public FollowersListDTO getFollowersList(Integer userId) throws Exception {
+    public FollowListDTO getFollowersList(Integer userId) throws Exception {
 
         return userRepository.getFollowersList(userId);
     }
 
     @Override
-    public FollowersListDTO getUserFollowingList(Integer userId) throws Exception {
+    public FollowListDTO getUserFollowingList(Integer userId) throws Exception {
         return userRepository.getUserFollowingList(userId);
     }
 
@@ -69,5 +70,15 @@ public class UserServiceImpl implements UserService {
         }
 
         return followedPosts;
+    }
+
+    @Override
+    public List<FollowDTO> getFollowersOrder(Integer userId, String typeOrder) throws Exception {
+        return userRepository.getFollowersOrder(userId, typeOrder);
+    }
+
+    @Override
+    public List<FollowDTO> getFollowedOrder(Integer userId, String typeOrder) throws Exception {
+        return userRepository.getFollowedOrder(userId, typeOrder);
     }
 }

@@ -3,12 +3,12 @@ package com.example.desafio.Desafio.DTOs;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FollowersListDTO {
+public class FollowListDTO {
     private Integer userId;
     private String userName;
     private List<FollowDTO> follow;
 
-    public FollowersListDTO() {
+    public FollowListDTO() {
         this.follow = new ArrayList<>();
     }
 
