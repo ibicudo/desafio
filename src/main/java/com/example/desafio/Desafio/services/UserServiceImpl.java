@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     public List<Post> getPostLastTwoWeeks(Integer id) throws Exception {
         User user = findById(id);
         List<Integer> sellers = user.getIdsFolllowed();
-        List<Post> posts = postRepository.getPostOrdByDate();
+        List<Post> posts = postRepository.getPostOrdByDate("name_desc");
         List<Post>  followedPosts = new ArrayList<>();
 
         for(Post post : posts){
@@ -73,6 +73,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<Post> getFollowedPost(Integer userId, String typeOrder) throws Exception {
+        User user = findById(userId);
+        List<Integer> sellers = user.getIdsFolllowed();
+        List<Post> posts = postRepository.getPostOrdByDate(typeOrder);
+        List<Post>  followedPosts = new ArrayList<>();
+
+        for(Post post : posts){
+            for(Integer i: sellers){
+                if(i == post.getUserId()){
+                    followedPosts.add(post);
+                }
+            }
+        }
+        return followedPosts;
+    }
+
+    @Override
     public List<FollowDTO> getFollowersOrder(Integer userId, String typeOrder) throws Exception {
         return userRepository.getFollowersOrder(userId, typeOrder);
     }
@@ -81,4 +98,6 @@ public class UserServiceImpl implements UserService {
     public List<FollowDTO> getFollowedOrder(Integer userId, String typeOrder) throws Exception {
         return userRepository.getFollowedOrder(userId, typeOrder);
     }
+
+
 }

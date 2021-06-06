@@ -4,6 +4,7 @@ import com.example.desafio.Desafio.DTOs.FollowDTO;
 import com.example.desafio.Desafio.DTOs.FollowersCountDTO;
 import com.example.desafio.Desafio.DTOs.FollowListDTO;
 import com.example.desafio.Desafio.DTOs.SellerDTO;
+import com.example.desafio.Desafio.models.Post;
 import com.example.desafio.Desafio.models.User;
 import com.example.desafio.Desafio.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +54,14 @@ public class UserController {
         return userService.getFollowersOrder(userId, order);
     }
 
-    @GetMapping("/{userId}/followedOrder/list")  //0009
+    @GetMapping("/{userId}/followedOrder/list")  //0008
     public List<FollowDTO> getFollowedOrder(@PathVariable Integer userId, @RequestParam String order) throws Exception {
         return userService.getFollowedOrder(userId, order);
+    }
+
+    @GetMapping("/products/followed/{userId}/list")//0009
+    public List<Post> getFollowedPost (@PathVariable Integer userId, @RequestParam String order) throws Exception {
+        return userService.getFollowedPost(userId, order);
     }
 
 }

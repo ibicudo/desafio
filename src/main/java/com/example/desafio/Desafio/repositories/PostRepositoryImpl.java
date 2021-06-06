@@ -42,7 +42,7 @@ public class PostRepositoryImpl implements PostRepository{
     }
 
     @Override
-    public List<Post> getPostOrdByDate() {
+    public List<Post> getPostOrdByDate(String order) {
         List<Post> posts = getPosts();
         List<Post> postOrderByDate= new ArrayList<>();
         Map<Date, Post> map = new HashMap<>();
@@ -50,9 +50,12 @@ public class PostRepositoryImpl implements PostRepository{
         for(Post post : posts){
             map.put(post.getDate(), post);
         }
-
         List<Date> chaves = new ArrayList<>(map.keySet());
-        Collections.sort(chaves, Collections.reverseOrder());
+        if(order.equals("name_desc")) {
+            Collections.sort(chaves);
+        }else if(order.equals("name_asc")){
+            Collections.sort(chaves, Collections.reverseOrder());
+        }
 
         for (Date date : chaves) {
             postOrderByDate.add(map.get(date));

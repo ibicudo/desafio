@@ -10,6 +10,6 @@ import java.util.Map;
 public interface PostRepository {
     Post createPost (Post post) throws IOException;
     Post getListPost (Integer userId);
-    List<Post> getPostOrdByDate ();
+    List<Post> getPostOrdByDate (String order);
     List<Post> getPosts ();
 }
