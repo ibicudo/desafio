@@ -20,4 +20,5 @@ public interface UserService {
     List<FollowDTO>  getFollowersOrder (Integer userId, String typeOrder) throws Exception;
     List<FollowDTO>  getFollowedOrder (Integer userId, String typeOrder) throws Exception;
     List<Post>  getFollowedPost (Integer userId, String typeOrder) throws Exception;
+    List<Post>  getPostsLastTwoWeeks (Integer userId) throws Exception;
 }

@@ -64,4 +64,10 @@ public class UserController {
         return userService.getFollowedPost(userId, order);
     }
 
+    @GetMapping("/products/followed/{userId}/listTwoWeeks")//0006
+    public List<Post> getPostsLastTwoWeeks (@PathVariable Integer userId) throws Exception {
+        return userService.getPostsLastTwoWeeks(userId);
+    }
+
+
 }

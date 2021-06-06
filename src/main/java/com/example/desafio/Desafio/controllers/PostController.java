@@ -21,9 +21,6 @@ public class PostController {
     private PostService postService;
 
     @Autowired
-    private UserServiceImpl userService;
-
-    @Autowired
     private PostRepository postRepository;
 
     @PostMapping("/newpost") //US 0005
@@ -35,11 +32,5 @@ public class PostController {
     public List<Post> getPosts(){
         return postRepository.getPosts();
     }
-
-    @GetMapping("/{userId}/postsByDate")
-    public  List<Post> getPostsByDate(@PathVariable Integer userId) throws Exception {
-        return  userService.getPostLastTwoWeeks(userId);
-    }
-
 
 }

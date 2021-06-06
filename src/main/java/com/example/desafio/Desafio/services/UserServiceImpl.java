@@ -11,8 +11,13 @@ import com.example.desafio.Desafio.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -87,6 +92,38 @@ public class UserServiceImpl implements UserService {
             }
         }
         return followedPosts;
+    }
+
+    @Override
+    public List<Post> getPostsLastTwoWeeks(Integer userId) throws Exception {
+
+        List<Post> listPosts = this.getFollowedPost(userId, "name_asc");
+        List<Post> listPostsLastTwoWeeks = new ArrayList<>();
+
+        for(Post posts : listPosts){
+            Date date = posts.getDate();
+            if(isLastTwoWeek(date)){
+                listPostsLastTwoWeeks.add(posts);
+            }
+        }
+
+        return listPostsLastTwoWeeks;
+    }
+
+    private boolean isLastTwoWeek(Date date){
+        Date currentDate = Calendar.getInstance().getTime();
+        //DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        //Date data2 = dateFormat.parse("1/06/2021");
+
+        long diff = currentDate.getTime() - date.getTime();
+        long days= TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+        if(days > 15) {
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     @Override
