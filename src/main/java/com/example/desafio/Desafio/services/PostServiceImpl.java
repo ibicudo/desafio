@@ -1,6 +1,8 @@
 package com.example.desafio.Desafio.services;
 
+import com.example.desafio.Desafio.DTOs.PromoPostCountDTO;
 import com.example.desafio.Desafio.models.Post;
+import com.example.desafio.Desafio.models.PostPromo;
 import com.example.desafio.Desafio.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,6 +23,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public PostPromo createPromoPost(PostPromo promoPost) throws IOException {
+        return postRepository.createPromoPost(promoPost);
+    }
+
+    @Override
     public List<Post> getFollowedPost(Integer userId, String typeOrder) throws Exception {
         return postRepository.getFollowedPost(userId, typeOrder);
     }
@@ -28,5 +35,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> getPostsLastTwoWeeks(Integer userId) throws Exception {
         return postRepository.getPostsLastTwoWeeks(userId);
+    }
+
+    @Override
+    public PromoPostCountDTO countPromo(Integer userId) throws Exception {
+        return postRepository.countPromo(userId);
     }
 }

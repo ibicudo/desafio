@@ -1,6 +1,8 @@
 package com.example.desafio.Desafio.repositories;
 
+import com.example.desafio.Desafio.DTOs.PromoPostCountDTO;
 import com.example.desafio.Desafio.models.Post;
+import com.example.desafio.Desafio.models.PostPromo;
 import com.example.desafio.Desafio.models.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,11 +23,14 @@ public class PostRepositoryImpl implements PostRepository{
     UserRepository userRepository;
 
     private File postsFile;
+    private File postsPromoFile;
     private ObjectMapper mapper = new ObjectMapper();
     private TypeReference<List<Post>> postTypeReferencce = new TypeReference<List<Post>>() {};
+    private TypeReference<List<PostPromo>> postPromoTypeReferencce = new TypeReference<List<PostPromo>>() {};
 
     public PostRepositoryImpl() throws FileNotFoundException {
         this.postsFile = ResourceUtils.getFile("src/main/resources/post.json");
+        this.postsPromoFile = ResourceUtils.getFile("src/main/resources/postPromo.json");
     }
 
     @Override
@@ -35,14 +40,29 @@ public class PostRepositoryImpl implements PostRepository{
         posts.add(postCreated);
 
         mapper.writeValue(postsFile, posts);
-        return null;
+        return postCreated;
     }
 
     @Override
-    public Post getListPost(Integer userId) {
+    public PostPromo createPromoPost(PostPromo promoPost) throws IOException {
+        List<PostPromo> promoPosts= mapper.readValue(this.postsPromoFile, postPromoTypeReferencce);
+        PostPromo postPromoCreated = new PostPromo(promoPost.getUserId(), promoPost.getId_post(), promoPost.getDate(), promoPost.getDetail(), promoPost.getCategory(), promoPost.getPrice(), promoPost.isHasPromo(), promoPost.getDiscount());
+        promoPosts.add(postPromoCreated);
 
+        mapper.writeValue(this.postsPromoFile, promoPosts);
+        return postPromoCreated;
+    }
 
-        return null;
+    @Override
+    public List<PostPromo> getListPromoPost() {
+        List<PostPromo> posts = null;
+        try{
+            posts = mapper.readValue(this.postsPromoFile, postPromoTypeReferencce);
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return posts;
     }
 
     @Override
@@ -111,6 +131,26 @@ public class PostRepositoryImpl implements PostRepository{
         }
 
         return listPostsLastTwoWeeks;
+    }
+
+    @Override
+    public PromoPostCountDTO countPromo(Integer userId) throws Exception {
+        User seller = userRepository.findById(userId);
+        List<PostPromo> postPromo = this.getListPromoPost();
+        PromoPostCountDTO result = new PromoPostCountDTO();
+
+        int total =0;
+
+        for(PostPromo post : postPromo){
+            if(seller.getId().equals(post.getUserId())){
+                total=total+1;
+            }
+        }
+
+        result.setUserId(userId);
+        result.setUserName(seller.getName());
+        result.setPromoproducts_count(total);
+        return result;
     }
 
     private boolean isLastTwoWeek(Date date){

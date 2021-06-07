@@ -1,6 +1,8 @@
 package com.example.desafio.Desafio.controllers;
 
+import com.example.desafio.Desafio.DTOs.PromoPostCountDTO;
 import com.example.desafio.Desafio.models.Post;
+import com.example.desafio.Desafio.models.PostPromo;
 import com.example.desafio.Desafio.repositories.PostRepository;
 import com.example.desafio.Desafio.services.PostService;
 import com.example.desafio.Desafio.services.UserServiceImpl;
@@ -28,6 +30,11 @@ public class PostController {
         return ResponseEntity.status(200).body(this.postService.createPost(post));
     }
 
+    @PostMapping("/newpromopost") //US 0010
+    public ResponseEntity<PostPromo> createPostPromo(@RequestBody PostPromo promoPost) throws IOException {
+        return ResponseEntity.status(200).body(this.postService.createPromoPost(promoPost));
+    }
+
     @GetMapping("/posts")
     public List<Post> getPosts(){
         return postRepository.getPosts();
@@ -43,4 +50,8 @@ public class PostController {
         return postService.getPostsLastTwoWeeks(userId);
     }
 
+    @GetMapping("/{userId}/countPromo")
+    public PromoPostCountDTO countPromo (@PathVariable Integer userId) throws Exception {
+        return postService.countPromo(userId);
+    }
 }

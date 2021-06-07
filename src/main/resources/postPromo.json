@@ -1,0 +1,70 @@
+[
+  {
+    "userId": 11,
+    "id_post": 1,
+    "date": "02-06-2021",
+    "detail": {
+      "product_id": 1,
+      "productName": "Cadeira Gamer",
+      "type": "Gamer",
+      "brand": "Racer",
+      "color": "Red & Black",
+      "notes": "Special Edition"
+    },
+    "category": 100,
+    "price": 650.5,
+    "hasPromo": true,
+    "discount": 0.25
+  },
+  {
+    "userId": 12,
+    "id_post": 1,
+    "date": "01-06-2021",
+    "detail": {
+      "product_id": 1,
+      "productName": "Cadeira Gamer",
+      "type": "Gamer",
+      "brand": "Racer",
+      "color": "Red & Black",
+      "notes": "Special Edition"
+    },
+    "category": 100,
+    "price": 650.5,
+    "hasPromo": true,
+    "discount": 0.25
+  },
+  {
+    "userId": 12,
+    "id_post": 2,
+    "date": "28-05-2021",
+    "detail": {
+      "product_id": 1,
+      "productName": "Monitor Gamer",
+      "type": "Gamer",
+      "brand": "Racer",
+      "color": "Red & Black",
+      "notes": "Special Edition"
+    },
+    "category": 100,
+    "price": 890.5,
+    "hasPromo": true,
+    "discount": 0.15
+  },
+  {
+    "userId": 12,
+    "id_post": 3,
+    "date": "03-06-2021",
+    "detail": {
+      "product_id": 1,
+      "productName": "Monitor",
+      "type": "Gamer",
+      "brand": "Racer",
+      "color": "Red & Black",
+      "notes": "Special Edition"
+    },
+    "category": 100,
+    "price": 760.5,
+    "hasPromo": true,
+    "discount": 0.15
+  }
+]
