@@ -116,9 +116,9 @@ public class PostRepositoryImpl implements PostRepository{
         }
         List<Date> chaves = new ArrayList<>(map.keySet());
         if(order.equals("name_desc")) {
-            Collections.sort(chaves);
-        }else if(order.equals("name_asc")){
             Collections.sort(chaves, Collections.reverseOrder());
+        }else if(order.equals("name_asc")){
+            Collections.sort(chaves);
         }
 
         for (Date date : chaves) {

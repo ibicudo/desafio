@@ -13,5 +13,35 @@
     },
     "category": 100,
     "price": 650.5
+  },
+  {
+    "userId": 11,
+    "id_post": 2,
+    "date": "28-05-2021",
+    "detail": {
+      "product_id": 1,
+      "productName": "Monitor Gamer",
+      "type": "Gamer",
+      "brand": "Racer",
+      "color": "Red & Black",
+      "notes": "Special Edition"
+    },
+    "category": 100,
+    "price": 750.5
+  },
+  {
+    "userId": 11,
+    "id_post": 3,
+    "date": "28-04-2021",
+    "detail": {
+      "product_id": 1,
+      "productName": "Mesa escritório",
+      "type": "madeira",
+      "brand": "Racer",
+      "color": "Red & Black",
+      "notes": "Special Edition"
+    },
+    "category": 100,
+    "price": 250.5
   }
 ]

@@ -8,6 +8,7 @@ import com.example.desafio.Desafio.models.Post;
 import com.example.desafio.Desafio.models.User;
 import com.example.desafio.Desafio.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +26,8 @@ public class UserController {
     }
 
     @PostMapping("/{userId}/follow/{userIdToFollow}")
-    public SellerDTO followSeller(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) throws Exception { //US 0001
-        return userService.followSeller(userId, userIdToFollow);
+    public ResponseEntity<SellerDTO> followSeller(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) throws Exception { //US 0001
+        return ResponseEntity.status(200).body(userService.followSeller(userId, userIdToFollow));
     }
 
     @GetMapping("/{userId}/followers/count")

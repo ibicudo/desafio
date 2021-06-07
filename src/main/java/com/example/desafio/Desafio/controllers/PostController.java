@@ -38,8 +38,8 @@ public class PostController {
         return postRepository.getPosts();
     }
 
-    @GetMapping("followed/{userId}/list")//0009
-    public List<Post> getFollowedPost (@PathVariable Integer userId, @RequestParam String order) throws Exception {
+    @GetMapping("followed/{userId}/list")
+    public List<Post> getFollowedPost (@PathVariable Integer userId, @RequestParam String order) throws Exception {//0009
         return postService.getFollowedPost(userId, order);
     }
 
@@ -49,12 +49,12 @@ public class PostController {
     }
 
     @GetMapping("/{userId}/countPromo")
-    public PromoPostCountDTO countPromo (@PathVariable Integer userId) throws Exception {
+    public PromoPostCountDTO countPromo (@PathVariable Integer userId) throws Exception { //0011
         return postService.countPromo(userId);
     }
 
     @GetMapping("/{userId}/list")
-    public PromoPostListDTO getListPromoPostBySeller (@PathVariable Integer userId) throws Exception {
+    public PromoPostListDTO getListPromoPostBySeller (@PathVariable Integer userId) throws Exception { //0012
         return postService.getListPromoPostBySeller(userId);
     }
 }
