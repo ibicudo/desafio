@@ -33,4 +33,14 @@ public class PostController {
         return postRepository.getPosts();
     }
 
+    @GetMapping("followed/{userId}/list")//0009
+    public List<Post> getFollowedPost (@PathVariable Integer userId, @RequestParam String order) throws Exception {
+        return postService.getFollowedPost(userId, order);
+    }
+
+    @GetMapping("/followed/{userId}/listTwoWeeks")//0006
+    public List<Post> getPostsLastTwoWeeks (@PathVariable Integer userId) throws Exception {
+        return postService.getPostsLastTwoWeeks(userId);
+    }
+
 }

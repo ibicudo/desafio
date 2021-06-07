@@ -12,4 +12,6 @@ public interface PostRepository {
     Post getListPost (Integer userId);
     List<Post> getPostOrdByDate (String order);
     List<Post> getPosts ();
+    List<Post>  getFollowedPost (Integer userId, String typeOrder) throws Exception;
+    List<Post>  getPostsLastTwoWeeks (Integer userId) throws Exception;
 }

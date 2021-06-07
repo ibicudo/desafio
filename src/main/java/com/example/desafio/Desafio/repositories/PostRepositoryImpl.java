@@ -1,6 +1,7 @@
 package com.example.desafio.Desafio.repositories;
 
 import com.example.desafio.Desafio.models.Post;
+import com.example.desafio.Desafio.models.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Repository
 public class PostRepositoryImpl implements PostRepository{
 
+    @Autowired
+    UserRepository userRepository;
 
     private File postsFile;
     private ObjectMapper mapper = new ObjectMapper();
@@ -74,5 +78,52 @@ public class PostRepositoryImpl implements PostRepository{
             e.printStackTrace();
         }
         return posts;
+    }
+
+    @Override
+    public List<Post> getFollowedPost(Integer userId, String typeOrder) throws Exception {
+        User user = userRepository.findById(userId);
+        List<Integer> sellers = user.getIdsFolllowed();
+        List<Post> posts = this.getPostOrdByDate(typeOrder);
+        List<Post>  followedPosts = new ArrayList<>();
+
+        for(Post post : posts){
+            for(Integer i: sellers){
+                if(i == post.getUserId()){
+                    followedPosts.add(post);
+                }
+            }
+        }
+        return followedPosts;
+    }
+
+    @Override
+    public List<Post> getPostsLastTwoWeeks(Integer userId) throws Exception {
+
+        List<Post> listPosts = this.getFollowedPost(userId, "name_asc");
+        List<Post> listPostsLastTwoWeeks = new ArrayList<>();
+
+        for(Post posts : listPosts){
+            Date date = posts.getDate();
+            if(isLastTwoWeek(date)){
+                listPostsLastTwoWeeks.add(posts);
+            }
+        }
+
+        return listPostsLastTwoWeeks;
+    }
+
+    private boolean isLastTwoWeek(Date date){
+        Date currentDate = Calendar.getInstance().getTime();
+
+        long diff = currentDate.getTime() - date.getTime();
+        long days= TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+        if(days > 15) {
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 }
