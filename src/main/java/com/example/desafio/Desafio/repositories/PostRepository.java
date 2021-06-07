@@ -12,7 +12,7 @@ import java.util.Map;
 public interface PostRepository {
     Post createPost (Post post) throws IOException;
     PostPromo createPromoPost (PostPromo promoPost) throws IOException;
-    List<PostPromo> getListPromoPost ();
+    List<PostPromo> getListPromoPost (Integer userId) throws Exception;
     List<Post> getPostOrdByDate (String order);
     List<Post> getPosts ();
     List<Post>  getFollowedPost (Integer userId, String typeOrder) throws Exception;

@@ -54,15 +54,26 @@ public class PostRepositoryImpl implements PostRepository{
     }
 
     @Override
-    public List<PostPromo> getListPromoPost() {
+    public List<PostPromo> getListPromoPost(Integer userId) throws Exception {
+        User seller = userRepository.findById(userId);
         List<PostPromo> posts = null;
+        List<PostPromo> postsPromoUser = new ArrayList<>();
+
         try{
             posts = mapper.readValue(this.postsPromoFile, postPromoTypeReferencce);
 
         }catch (Exception e) {
             e.printStackTrace();
         }
-        return posts;
+
+        for(PostPromo post : posts){
+            if(seller.getId().equals(post.getUserId())){
+               postsPromoUser.add(post);
+            }
+        }
+
+
+        return postsPromoUser;
     }
 
     @Override
@@ -136,20 +147,13 @@ public class PostRepositoryImpl implements PostRepository{
     @Override
     public PromoPostCountDTO countPromo(Integer userId) throws Exception {
         User seller = userRepository.findById(userId);
-        List<PostPromo> postPromo = this.getListPromoPost();
+        List<PostPromo> postPromo = this.getListPromoPost(userId);
         PromoPostCountDTO result = new PromoPostCountDTO();
 
-        int total =0;
-
-        for(PostPromo post : postPromo){
-            if(seller.getId().equals(post.getUserId())){
-                total=total+1;
-            }
-        }
 
         result.setUserId(userId);
         result.setUserName(seller.getName());
-        result.setPromoproducts_count(total);
+        result.setPromoproducts_count(postPromo.size());
         return result;
     }
 

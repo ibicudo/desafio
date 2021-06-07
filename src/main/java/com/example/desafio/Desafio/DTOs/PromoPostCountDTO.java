@@ -3,7 +3,7 @@ package com.example.desafio.Desafio.DTOs;
 public class PromoPostCountDTO {
     private Integer userId;
     private String userName;
-    private double promoproducts_count;
+    private int promoproducts_count;
 
     public Integer getUserId() {
         return userId;
@@ -21,11 +21,11 @@ public class PromoPostCountDTO {
         this.userName = userName;
     }
 
-    public double getPromoproducts_count() {
+    public int getPromoproducts_count() {
         return promoproducts_count;
     }
 
-    public void setPromoproducts_count(double promoproducts_count) {
+    public void setPromoproducts_count(int promoproducts_count) {
         this.promoproducts_count = promoproducts_count;
     }
 }
