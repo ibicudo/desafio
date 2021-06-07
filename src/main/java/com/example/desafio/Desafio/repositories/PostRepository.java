@@ -1,6 +1,8 @@
 package com.example.desafio.Desafio.repositories;
 
 import com.example.desafio.Desafio.DTOs.PromoPostCountDTO;
+import com.example.desafio.Desafio.DTOs.PromoPostDTO;
+import com.example.desafio.Desafio.DTOs.PromoPostListDTO;
 import com.example.desafio.Desafio.models.Post;
 import com.example.desafio.Desafio.models.PostPromo;
 
@@ -13,6 +15,7 @@ public interface PostRepository {
     Post createPost (Post post) throws IOException;
     PostPromo createPromoPost (PostPromo promoPost) throws IOException;
     List<PostPromo> getListPromoPost (Integer userId) throws Exception;
+    PromoPostListDTO getListPromoPostBySeller (Integer userId) throws Exception;
     List<Post> getPostOrdByDate (String order);
     List<Post> getPosts ();
     List<Post>  getFollowedPost (Integer userId, String typeOrder) throws Exception;

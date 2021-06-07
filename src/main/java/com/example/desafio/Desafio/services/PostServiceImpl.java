@@ -1,6 +1,7 @@
 package com.example.desafio.Desafio.services;
 
 import com.example.desafio.Desafio.DTOs.PromoPostCountDTO;
+import com.example.desafio.Desafio.DTOs.PromoPostListDTO;
 import com.example.desafio.Desafio.models.Post;
 import com.example.desafio.Desafio.models.PostPromo;
 import com.example.desafio.Desafio.repositories.PostRepository;
@@ -41,4 +42,11 @@ public class PostServiceImpl implements PostService {
     public PromoPostCountDTO countPromo(Integer userId) throws Exception {
         return postRepository.countPromo(userId);
     }
+
+    @Override
+    public PromoPostListDTO getListPromoPostBySeller(Integer userId) throws Exception {
+        return postRepository.getListPromoPostBySeller(userId);
+    }
+
+
 }

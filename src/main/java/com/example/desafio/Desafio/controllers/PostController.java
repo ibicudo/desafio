@@ -1,19 +1,17 @@
 package com.example.desafio.Desafio.controllers;
 
 import com.example.desafio.Desafio.DTOs.PromoPostCountDTO;
+import com.example.desafio.Desafio.DTOs.PromoPostListDTO;
 import com.example.desafio.Desafio.models.Post;
 import com.example.desafio.Desafio.models.PostPromo;
 import com.example.desafio.Desafio.repositories.PostRepository;
 import com.example.desafio.Desafio.services.PostService;
-import com.example.desafio.Desafio.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("products")
@@ -53,5 +51,10 @@ public class PostController {
     @GetMapping("/{userId}/countPromo")
     public PromoPostCountDTO countPromo (@PathVariable Integer userId) throws Exception {
         return postService.countPromo(userId);
+    }
+
+    @GetMapping("/{userId}/list")
+    public PromoPostListDTO getListPromoPostBySeller (@PathVariable Integer userId) throws Exception {
+        return postService.getListPromoPostBySeller(userId);
     }
 }

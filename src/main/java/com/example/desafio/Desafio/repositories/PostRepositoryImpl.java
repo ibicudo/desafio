@@ -1,6 +1,8 @@
 package com.example.desafio.Desafio.repositories;
 
 import com.example.desafio.Desafio.DTOs.PromoPostCountDTO;
+import com.example.desafio.Desafio.DTOs.PromoPostDTO;
+import com.example.desafio.Desafio.DTOs.PromoPostListDTO;
 import com.example.desafio.Desafio.models.Post;
 import com.example.desafio.Desafio.models.PostPromo;
 import com.example.desafio.Desafio.models.User;
@@ -74,6 +76,33 @@ public class PostRepositoryImpl implements PostRepository{
 
 
         return postsPromoUser;
+    }
+
+    @Override
+    public PromoPostListDTO getListPromoPostBySeller(Integer userId) throws Exception {
+        User seller = userRepository.findById(userId);
+        List<PostPromo> listPosts = this.getListPromoPost(userId);
+        List<PromoPostDTO> promoPost  = new ArrayList<>();
+        PromoPostDTO promoPostDTO = new PromoPostDTO();
+        PromoPostListDTO promoPostListDTO = new PromoPostListDTO();
+
+        for(PostPromo posts : listPosts) {
+            promoPostDTO = new PromoPostDTO();
+            promoPostDTO.setId_post(posts.getId_post());
+            promoPostDTO.setDate(posts.getDate());
+            promoPostDTO.setDetail(posts.getDetail());
+            promoPostDTO.setCategory(posts.getCategory());
+            promoPostDTO.setPrice(posts.getPrice());
+            promoPostDTO.setHasPromo(posts.isHasPromo());
+            promoPostDTO.setDiscount(posts.getDiscount());
+            promoPost.add(promoPostDTO);
+        }
+
+        promoPostListDTO.setUserId(seller.getId());
+        promoPostListDTO.setUserName(seller.getName());
+        promoPostListDTO.setPosts(promoPost);
+
+        return promoPostListDTO;
     }
 
     @Override
