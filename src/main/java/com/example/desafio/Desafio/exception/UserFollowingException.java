@@ -5,6 +5,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 public class UserFollowingException extends ResponseStatusException {
     public UserFollowingException() {
-        super (HttpStatus.BAD_REQUEST, "User already following");
+        super (HttpStatus.BAD_REQUEST, "User already is following");
     }
 }

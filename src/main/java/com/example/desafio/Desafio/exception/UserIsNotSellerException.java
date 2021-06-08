@@ -5,6 +5,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 public class UserIsNotSellerException extends ResponseStatusException {
     public UserIsNotSellerException() {
-        super(HttpStatus.BAD_REQUEST, "User can not following user!");
+        super(HttpStatus.BAD_REQUEST, "User is not a seller!");
     }
 }

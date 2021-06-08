@@ -4,6 +4,7 @@ import com.example.desafio.Desafio.DTOs.FollowersCountDTO;
 import com.example.desafio.Desafio.DTOs.FollowDTO;
 import com.example.desafio.Desafio.DTOs.FollowListDTO;
 import com.example.desafio.Desafio.DTOs.SellerDTO;
+import com.example.desafio.Desafio.exception.UserFollowingException;
 import com.example.desafio.Desafio.exception.UserIsNotFollowing;
 import com.example.desafio.Desafio.exception.UserIsNotSellerException;
 import com.example.desafio.Desafio.exception.UsersAreEqualException;
@@ -109,13 +110,13 @@ public class UserRepositoryImpl implements UserRepository {
 
     private void idIsEqual (Integer userId, Integer userIdToFollow) throws Exception {
         if(userId.equals(userIdToFollow)){
-            throw new Exception("Users are equal");
+            throw new UsersAreEqualException();
         }
     }
 
     private void userIsFollowing (User userBuyer, SellerDTO seller) throws Exception{
         if(userBuyer.getIdsFolllowed().contains(seller.getId())){
-            throw new UsersAreEqualException();
+            throw new UserFollowingException();
         }
     }
 

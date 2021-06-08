@@ -62,6 +62,7 @@ public class PostRepositoryImpl implements PostRepository{
         List<PostPromo> promoPosts= mapper.readValue(this.postsPromoFile, postPromoTypeReferencce);
 
         isSeller(promoPost.getUserId());
+        sellerAlreadyPostedPromo(promoPost.getUserId(), promoPost.getId_post());
         PostPromo postPromoCreated = new PostPromo(promoPost.getUserId(), promoPost.getId_post(), promoPost.getDate(), promoPost.getDetail(), promoPost.getCategory(), promoPost.getPrice(), promoPost.isHasPromo(), promoPost.getDiscount());
         promoPosts.add(postPromoCreated);
 
@@ -81,6 +82,16 @@ public class PostRepositoryImpl implements PostRepository{
         List<Post> list = this.getPosts();
         for(Post post: list){
             if(post.getUserId().equals(id) && post.getId_post().equals(idPost)){
+                throw new PostAlreadyExistsException();
+            }
+        }
+
+    }
+
+    private void sellerAlreadyPostedPromo(Integer userId, Integer idPost) throws Exception {
+        List<PostPromo> list = this.getListPromoPost(userId);
+        for(PostPromo post: list){
+            if(post.getUserId().equals(userId) && post.getId_post().equals(idPost)){
                 throw new PostAlreadyExistsException();
             }
         }
