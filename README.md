@@ -43,7 +43,7 @@ No Postman temos:
 
 
  <strong>US 0005 - createPost():  </strong>
-- userId tem que ser de 11 a 20 (sellers), caso não terá bad request
+- userId tem que ser de 11 a 20 (sellers), caso não, terá bad request
 - O seller 11 já tem 3 posts criados no json e o 15 tem 1 post
 
 
