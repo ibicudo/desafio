@@ -10,7 +10,7 @@ Arquivos (estão em resources):
 - sellers.json: armazena os vendedores
 - users.json: armazena todos os usuários (incluindo os vendedores que estão em sellers, sendo que tem o mesmo id em ambos arquivos)	
 
-Para rodar, apenas start a aplicação e rodar a collection do postman que está em um arquivo json no projeto. 
+Para rodar, apenas start a aplicação e rodar a collection do postman que está em um <strong>arquivo json no projeto na pasta resources.</strong> 
 No Postman temos:
 
  <strong>US 0001-  followSeller(): </strong> 
