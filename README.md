@@ -1,7 +1,7 @@
 # desafio
 
 README 
-<h1>Arquivos json: </h1>
+<strong>Arquivos json: </strong>
 - O Arquivo users.json já possui 20 users criados , sendo que do 1 ao 10 são apenas users e do 11 ao 20 são sellers 
 
 Arquivos (estão em resources): 
