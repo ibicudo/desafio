@@ -11,7 +11,7 @@ Arquivos (estão em resources):
 - users.json: armazena todos os usuários (incluindo os vendedores que estão em sellers, sendo que tem o mesmo id em ambos arquivos)	
 - collection postman: desafioSpring
 
-<strong>Para rodar, apenas start a aplicação e rodar a collection do postman que está em um arquivo json no projeto na pasta resources.</strong> 
+<strong>Para rodar o projeto, apenas start a aplicação e export a collection do postman que está dispon[ivel em um arquivo json no projeto na pasta resources.</strong> 
 No Postman temos:
 
  <strong>US 0001-  followSeller(): </strong> 
