@@ -1,5 +1,6 @@
 package com.example.desafio.Desafio.services;
 
+import com.example.desafio.Desafio.DTOs.PostsDTO;
 import com.example.desafio.Desafio.DTOs.PromoPostCountDTO;
 import com.example.desafio.Desafio.DTOs.PromoPostListDTO;
 import com.example.desafio.Desafio.models.Post;
@@ -34,7 +35,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> getPostsLastTwoWeeks(Integer userId) throws Exception {
+    public PostsDTO getPostsLastTwoWeeks(Integer userId) throws Exception {
         return postRepository.getPostsLastTwoWeeks(userId);
     }
 

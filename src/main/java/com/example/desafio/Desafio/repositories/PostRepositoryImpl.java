@@ -1,5 +1,6 @@
 package com.example.desafio.Desafio.repositories;
 
+import com.example.desafio.Desafio.DTOs.PostsDTO;
 import com.example.desafio.Desafio.DTOs.PromoPostCountDTO;
 import com.example.desafio.Desafio.DTOs.PromoPostDTO;
 import com.example.desafio.Desafio.DTOs.PromoPostListDTO;
@@ -189,9 +190,9 @@ public class PostRepositoryImpl implements PostRepository{
     }
 
     @Override
-    public List<Post> getPostsLastTwoWeeks(Integer userId) throws Exception {
-
-        List<Post> listPosts = this.getFollowedPost(userId, "name_asc");
+    public PostsDTO getPostsLastTwoWeeks(Integer userId) throws Exception {
+        PostsDTO postsdto = new PostsDTO();
+        List<Post> listPosts = this.getFollowedPost(userId, "name_desc");
         List<Post> listPostsLastTwoWeeks = new ArrayList<>();
 
         for(Post posts : listPosts){
@@ -201,7 +202,10 @@ public class PostRepositoryImpl implements PostRepository{
             }
         }
 
-        return listPostsLastTwoWeeks;
+        postsdto.setUserId(userId);
+        postsdto.setPosts(listPostsLastTwoWeeks);
+
+        return postsdto;
     }
 
     @Override

@@ -43,35 +43,5 @@
     },
     "category": 100,
     "price": 250.5
-  },
-  {
-    "userId": 11,
-    "id_post": 4,
-    "date": "28-04-2021",
-    "detail": {
-      "product_id": 1,
-      "productName": "Mesa escritório",
-      "type": "madeira",
-      "brand": "Racer",
-      "color": "Red & Black",
-      "notes": "Special Edition"
-    },
-    "category": 100,
-    "price": 250.5
-  },
-  {
-    "userId": 11,
-    "id_post": 5,
-    "date": "28-04-2021",
-    "detail": {
-      "product_id": 1,
-      "productName": "Mesa escritório",
-      "type": "madeira",
-      "brand": "Racer",
-      "color": "Red & Black",
-      "notes": "Special Edition"
-    },
-    "category": 100,
-    "price": 250.5
   }
 ]

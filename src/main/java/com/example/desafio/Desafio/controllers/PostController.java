@@ -1,5 +1,6 @@
 package com.example.desafio.Desafio.controllers;
 
+import com.example.desafio.Desafio.DTOs.PostsDTO;
 import com.example.desafio.Desafio.DTOs.PromoPostCountDTO;
 import com.example.desafio.Desafio.DTOs.PromoPostListDTO;
 import com.example.desafio.Desafio.models.Post;
@@ -44,7 +45,7 @@ public class PostController {
     }
 
     @GetMapping("/followed/{userId}/listTwoWeeks")//0006
-    public List<Post> getPostsLastTwoWeeks (@PathVariable Integer userId) throws Exception {
+    public PostsDTO getPostsLastTwoWeeks (@PathVariable Integer userId) throws Exception {
         return postService.getPostsLastTwoWeeks(userId);
     }
 

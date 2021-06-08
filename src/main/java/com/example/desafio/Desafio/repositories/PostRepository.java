@@ -1,5 +1,6 @@
 package com.example.desafio.Desafio.repositories;
 
+import com.example.desafio.Desafio.DTOs.PostsDTO;
 import com.example.desafio.Desafio.DTOs.PromoPostCountDTO;
 import com.example.desafio.Desafio.DTOs.PromoPostDTO;
 import com.example.desafio.Desafio.DTOs.PromoPostListDTO;
@@ -19,6 +20,6 @@ public interface PostRepository {
     List<Post> getPostOrdByDate (String order);
     List<Post> getPosts ();
     List<Post>  getFollowedPost (Integer userId, String typeOrder) throws Exception;
-    List<Post>  getPostsLastTwoWeeks (Integer userId) throws Exception;
+    PostsDTO getPostsLastTwoWeeks (Integer userId) throws Exception;
     PromoPostCountDTO countPromo (Integer userId ) throws Exception;
 }
