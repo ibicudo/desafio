@@ -25,11 +25,11 @@ No Postman temos:
 - User 3 segue 15 e 11
 - User 11 segue 20 
 	
-</br>
+
  <strong>US 0002 - getTotalFollowers(): </strong>
 - Passar um ID de 11 a 20 (vendedores cadastrados)
 - Vendedores que já tem seguidores : 11, 12, 15, 20
-</br>
+
 
  <strong>US 0003 - getListFollowers (): </strong>
 - Passar um ID de 11 a 20 
