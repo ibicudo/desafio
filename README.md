@@ -17,7 +17,7 @@ No Postman temos:
  <strong>US 0001-  followSeller(): </strong> 
 - Para o User pode passar um ID de 1 a 20 (já cadastrados no arquivo)
 - Para o Seller pode passar um ID de 11 a 20 (já cadastrados no arquivo)
-<p>Casos de exception:</p>
+</br>Casos de exception:
 - User tentar seguir ele mesmo
 - User tentar seguir um user que não é seller
 <p>Como está a base():</p>
