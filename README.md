@@ -5,10 +5,10 @@ README
 - O Arquivo users.json já possui 20 users criados , sendo que do 1 ao 10 são apenas users e do 11 ao 20 são sellers 
 
 Arquivos (estão em resources): 
-_post.json :  armazena os posts criados
-_postPromo.json : armazena os posts promocionais criados
-_sellers.json: armazena os vendedores
-_users.json: armazena todos os usuários (incluindo os vendedores que estão em sellers, sendo que tem o mesmo id em ambos arquivos)	
+- post.json :  armazena os posts criados
+- postPromo.json : armazena os posts promocionais criados
+- sellers.json: armazena os vendedores
+- users.json: armazena todos os usuários (incluindo os vendedores que estão em sellers, sendo que tem o mesmo id em ambos arquivos)	
 
 Para rodar, apenas start a aplicação e rodar a collection do postman que está em um arquivo json no projeto. 
 No Postman temos:
