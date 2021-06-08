@@ -35,70 +35,70 @@ No Postman temos:
 - Passar um ID de 11 a 20 
 - Vendedores que já tem seguidores : 11, 12, 15, 20
 
-</br>
+
  <strong>US 0004	- getFollowedList()  </strong>
 - Passar um ID de 1 a 20
 - Usuários ou vendedores que já estão seguindo algum vendedor da lista: 2 ,3, 11
 - Os outros usuários não estão seguindo nenhum vendedor por enquanto, logo a lista virá vazia
 
-</br>
+
  <strong>US 0005 - createPost():  </strong>
 - userId tem que ser de 11 a 20 (sellers), caso não terá bad request
 - O seller 11 já tem 3 posts criados no json e o 15 tem 1 post
 
-</br>
+
  <strong>US 0006 - getPostsLastTwoWeeks(): </strong>
 - Passar um ID de 1 a 20
 - O user 3 já está seguindo vendedores que fizeram publicação de algum post
 
-</br>
+
  <strong>US 0007 - unfollowSeller():  </strong>
 - Passar ID de 1 a 20
 - Users que já estão seguindo algum vendedor na base atual: 2, 3, 11
 </br></br>Exceptions:
 - Não é permitido ids iguais, não é permitido parar de seguir um vendedor que não existe  
 
-</br>
+
  <strong>US 0008 - getFollowersASC (já está com parâmetro name_asc) </strong>
 - Retorna lista de seguidores ordenado de forma crescente
 - Passar ID de 11 a 20 
 
-</br>
+
  <strong>US 0008 - getFollowersDESC  </strong>
 - Retorna lista de seguidores ordenado de forma decrescente
 - Passar ID de 11 a 20 
 
-</br>
+
  <strong>US 0008 - getFollowedASC  </strong>
 - Retorna lista de vendedores que um usuário segue ordenado de forma crescente
 - Passar ID de 1 a 20 
 
-</br>
+
  <strong>US 0008 - getFollowedDESC.  </strong>
 - Retorna lista de vendedores que um usuário segue ordenado de forma decrescente
 - Passar ID de 1 a 20 
 
-</br>
+
  <strong>US 0009 - getPostsASC:   </strong>
 - Passar a ID de 1 a 20 
 - Na base , o id 3 já está seguindo vendedor que tem publicação de posts , os que não ao estiverem vai retornar vazio
 
-</br>
+
  <strong>US 0009 - getPostsDESC  </strong>
 - Passar a ID de 1 a 20 
 - Na base , o id 3 já está seguindo vendedor que tem publicação de posts , os que não ao estiverem vai retornar vazio
 
-</br>
+
  <strong>US 0010 - createPromoPost.  </strong>
 - Passar payload conforme já está no postman
 - Na base, já tem um post cadastrado para o userId 11 e dois para o userId 12
 
-</br>
+
  <strong>US 0011 - countPromo.  </strong>
 - Passar ID de 11 a 20 
 - Ids 11 e 12 já têm um post promocional criado
 
-</br>
+
  <strong>US 0012 - getListPromoPostBySeller  </strong>
 - Passar ID de 11 a 20
 - Somente o ID 11 e 12 tem posts promocionais
