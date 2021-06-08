@@ -28,7 +28,7 @@ public class SellerRepositoryImpl implements SellerRepository {
         Optional<SellerDTO> optionalSeller = getSeller().stream().filter(sellersDTO -> sellersDTO.getId().equals(id)).findFirst();
 
         if (!optionalSeller.isPresent()) {
-            throw new Exception("Order does not exist");
+            throw new Exception("Seller does not exists");
         }
 
         return optionalSeller.get();

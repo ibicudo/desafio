@@ -45,7 +45,7 @@ public class UserRepositoryImpl implements UserRepository {
         Optional<User> optionalUser = getUsers().stream().filter(users -> users.getId().equals(id)).findFirst();
 
         if (!optionalUser.isPresent()) {
-            throw new Exception("Order does not exist");
+            throw new Exception("User does not exist");
         }
 
         return optionalUser.get();
