@@ -14,15 +14,15 @@ Para rodar, apenas start a aplicação e rodar a collection do postman que está
 No Postman temos:
 
  <strong>US 0001-  followSeller(): </strong> 
-	- Para o User pode passar um ID de 1 a 20 (já cadastrados no arquivo)
-	- Para o Seller pode passar um ID de 11 a 20 (já cadastrados no arquivo)
-	Casos de exception:
-		- User tentar seguir ele mesmo
-		- User tentar seguir um user que não é seller
-	Como está a base():
-		- User 2 segue o 12 e o 20
-		- User 3 segue 15 e 11
-		- User 11 segue 20 
+- Para o User pode passar um ID de 1 a 20 (já cadastrados no arquivo)
+- Para o Seller pode passar um ID de 11 a 20 (já cadastrados no arquivo)
+Casos de exception:
+- User tentar seguir ele mesmo
+- User tentar seguir um user que não é seller
+Como está a base():
+- User 2 segue o 12 e o 20
+- User 3 segue 15 e 11
+- User 11 segue 20 
 	
 
  <strong>US 0002 - getTotalFollowers(): </strong>
