@@ -3,6 +3,9 @@ package com.example.desafio.Desafio.repositories;
 import com.example.desafio.Desafio.DTOs.PromoPostCountDTO;
 import com.example.desafio.Desafio.DTOs.PromoPostDTO;
 import com.example.desafio.Desafio.DTOs.PromoPostListDTO;
+import com.example.desafio.Desafio.exception.DateIsInvalidExcpetion;
+import com.example.desafio.Desafio.exception.PostAlreadyExistsException;
+import com.example.desafio.Desafio.exception.UserIsNotSellerException;
 import com.example.desafio.Desafio.models.Post;
 import com.example.desafio.Desafio.models.PostPromo;
 import com.example.desafio.Desafio.models.User;
@@ -15,6 +18,10 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -36,8 +43,12 @@ public class PostRepositoryImpl implements PostRepository{
     }
 
     @Override
-    public Post createPost(Post post) throws IOException {
+    public Post createPost(Post post) throws Exception {
         List<Post> posts = mapper.readValue(postsFile, postTypeReferencce);
+
+        isSeller(post.getUserId());
+        sellerAlreadyPostedThis(post.getUserId(), post.getId_post());
+
         Post postCreated = new Post(post.getUserId(), post.getId_post(), post.getDate(), post.getDetail(), post.getCategory(), post.getPrice());
         posts.add(postCreated);
 
@@ -46,13 +57,33 @@ public class PostRepositoryImpl implements PostRepository{
     }
 
     @Override
-    public PostPromo createPromoPost(PostPromo promoPost) throws IOException {
+    public PostPromo createPromoPost(PostPromo promoPost) throws Exception {
         List<PostPromo> promoPosts= mapper.readValue(this.postsPromoFile, postPromoTypeReferencce);
+
+        isSeller(promoPost.getUserId());
         PostPromo postPromoCreated = new PostPromo(promoPost.getUserId(), promoPost.getId_post(), promoPost.getDate(), promoPost.getDetail(), promoPost.getCategory(), promoPost.getPrice(), promoPost.isHasPromo(), promoPost.getDiscount());
         promoPosts.add(postPromoCreated);
 
+
         mapper.writeValue(this.postsPromoFile, promoPosts);
         return postPromoCreated;
+    }
+
+    private void isSeller (Integer id) throws Exception {
+        User user = userRepository.findById(id);
+        if (!user.isSeller()){
+            throw new UserIsNotSellerException();
+        }
+    }
+
+    private void sellerAlreadyPostedThis(Integer id, Integer idPost){
+        List<Post> list = this.getPosts();
+        for(Post post: list){
+            if(post.getUserId().equals(id) && post.getId_post().equals(idPost)){
+                throw new PostAlreadyExistsException();
+            }
+        }
+
     }
 
     @Override

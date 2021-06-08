@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface PostRepository {
-    Post createPost (Post post) throws IOException;
-    PostPromo createPromoPost (PostPromo promoPost) throws IOException;
+    Post createPost (Post post) throws Exception;
+    PostPromo createPromoPost (PostPromo promoPost) throws Exception;
     List<PostPromo> getListPromoPost (Integer userId) throws Exception;
     PromoPostListDTO getListPromoPostBySeller (Integer userId) throws Exception;
     List<Post> getPostOrdByDate (String order);

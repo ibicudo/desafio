@@ -11,8 +11,8 @@ import java.util.List;
 
 
 public interface PostService {
-    Post createPost (Post post) throws IOException;
-    PostPromo createPromoPost (PostPromo promoPost) throws IOException;
+    Post createPost (Post post) throws Exception;
+    PostPromo createPromoPost (PostPromo promoPost) throws IOException, Exception;
     List<Post> getFollowedPost (Integer userId, String typeOrder) throws Exception;
     List<Post>  getPostsLastTwoWeeks (Integer userId) throws Exception;
     PromoPostCountDTO countPromo (Integer userId ) throws Exception;

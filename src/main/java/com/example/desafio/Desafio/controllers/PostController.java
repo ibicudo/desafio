@@ -24,12 +24,12 @@ public class PostController {
     private PostRepository postRepository;
 
     @PostMapping("/newpost") //US 0005
-    public ResponseEntity<Post> createPost(@RequestBody Post post) throws IOException {
+    public ResponseEntity<Post> createPost(@RequestBody Post post) throws Exception {
         return ResponseEntity.status(200).body(this.postService.createPost(post));
     }
 
     @PostMapping("/newpromopost") //US 0010
-    public ResponseEntity<PostPromo> createPostPromo(@RequestBody PostPromo promoPost) throws IOException {
+    public ResponseEntity<PostPromo> createPostPromo(@RequestBody PostPromo promoPost) throws Exception {
         return ResponseEntity.status(200).body(this.postService.createPromoPost(promoPost));
     }
 

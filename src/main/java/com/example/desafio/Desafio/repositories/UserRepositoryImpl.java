@@ -4,7 +4,9 @@ import com.example.desafio.Desafio.DTOs.FollowersCountDTO;
 import com.example.desafio.Desafio.DTOs.FollowDTO;
 import com.example.desafio.Desafio.DTOs.FollowListDTO;
 import com.example.desafio.Desafio.DTOs.SellerDTO;
-import com.example.desafio.Desafio.models.Post;
+import com.example.desafio.Desafio.exception.UserIsNotFollowing;
+import com.example.desafio.Desafio.exception.UserIsNotSellerException;
+import com.example.desafio.Desafio.exception.UsersAreEqualException;
 import com.example.desafio.Desafio.models.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -66,21 +68,18 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public SellerDTO followSeller (Integer userId, Integer userIdToFollow) throws Exception {
         SellerDTO sellerDTO = null;
-        try{
 
             User userBuyer = findById(userId);
             sellerDTO = sellerRepositoryImpl.findById(userIdToFollow);
 
             idIsEqual(userId, userIdToFollow);
             userIsFollowing(userBuyer, sellerDTO);
+            isSeller(userIdToFollow);
 
             sellerDTO.getIdsFollowers().add(userId);
             userBuyer.getIdsFolllowed().add(userIdToFollow);
             sellerRepositoryImpl.updateSeller(userIdToFollow, sellerDTO);
-            this.updateUser(userId,userBuyer);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+            this.updateUser(userId, userBuyer);
 
         return sellerDTO;
 
@@ -89,23 +88,21 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public SellerDTO unfollowSeller(Integer userId, Integer userIdToFollow) throws Exception {
         SellerDTO sellerDTO = null;
-        try{
+
 
             User userBuyer = findById(userId);
             sellerDTO = sellerRepositoryImpl.findById(userIdToFollow);
 
             idIsEqual(userId, userIdToFollow);
             if(!userBuyer.getIdsFolllowed().contains(sellerDTO.getId())){
-                throw new Exception("User is not following seller");
+                throw new UserIsNotFollowing();
             }
-
+            isSeller(userIdToFollow);
             sellerDTO.getIdsFollowers().remove(userId);
             userBuyer.getIdsFolllowed().remove(userIdToFollow);
             sellerRepositoryImpl.updateSeller(userIdToFollow, sellerDTO);
             this.updateUser(userId,userBuyer);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
 
         return sellerDTO;
     }
@@ -118,10 +115,16 @@ public class UserRepositoryImpl implements UserRepository {
 
     private void userIsFollowing (User userBuyer, SellerDTO seller) throws Exception{
         if(userBuyer.getIdsFolllowed().contains(seller.getId())){
-            throw new Exception("User is following");
+            throw new UsersAreEqualException();
         }
     }
 
+    private void isSeller (Integer idSeller) throws Exception{
+        User user = findById(idSeller);
+        if(!user.isSeller()){
+            throw new UserIsNotSellerException();
+        }
+    }
 
     @Override
     public User updateUser(Integer id, User user) throws Exception {

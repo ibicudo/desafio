@@ -19,12 +19,12 @@ public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
 
     @Override
-    public Post createPost(Post post) throws IOException {
+    public Post createPost(Post post) throws Exception {
         return postRepository.createPost(post);
     }
 
     @Override
-    public PostPromo createPromoPost(PostPromo promoPost) throws IOException {
+    public PostPromo createPromoPost(PostPromo promoPost) throws Exception {
         return postRepository.createPromoPost(promoPost);
     }
 
